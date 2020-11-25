@@ -8,8 +8,9 @@ CONFIG += c++14
 SOURCES += \
     core/city.cpp \
     creategame.cpp \
+    graphics/mainwindow.cpp \
     graphics/startdialog.cpp \
-    main.cc
+    main.cc \
 
 win32:CONFIG(release, debug|release): LIBS += \
     -L$$OUT_PWD/../Course/CourseLib/release/ -lCourseLib
@@ -37,7 +38,9 @@ else:unix: PRE_TARGETDEPS += \
 
 HEADERS += \
     core/city.hh \
-    graphics/startdialog.hh
+    graphics/mainwindow.hh \
+    graphics/startdialog.hh \
 
 FORMS += \
-    graphics/startdialog.ui
+    graphics/mainwindow.ui \
+    graphics/startdialog.ui \

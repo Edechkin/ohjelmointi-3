@@ -12,7 +12,7 @@ City::City() :
     gameStarted_(false)
 {
 
-    window_ = new CourseSide::SimpleMainWindow();
+    window_ = new Student::MainWindow();
 
     QImage basicbackground(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage bigbackground(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
@@ -26,7 +26,7 @@ City::City() :
 
 void City::setBackground(QImage &basicbackground, QImage& bigbackground)
 {
-    window_->setPicture(basicbackground);
+    window_->setPicture(bigbackground);
 }
 
 void City::setClock(QTime clock)

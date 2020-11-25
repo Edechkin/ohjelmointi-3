@@ -3,10 +3,10 @@
 
 #include "../Course/CourseLib/interfaces/icity.hh"
 #include "../Course/CourseLib/interfaces/iactor.hh"
-#include "../Course/CourseLib/graphics/simplemainwindow.hh"
 #include "../Course/CourseLib/actors/nysse.hh"
 #include "../Course/CourseLib/actors/passenger.hh"
 #include "../Course/CourseLib/actors/stop.hh"
+#include "graphics/mainwindow.hh"
 
 #include <memory>
 #include <QTime>
@@ -60,7 +60,7 @@ private:
 
     bool gameStarted_;
 
-    CourseSide::SimpleMainWindow* window_;
+    Student::MainWindow* window_;
 };
 
 }
