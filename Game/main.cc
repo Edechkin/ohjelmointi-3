@@ -1,6 +1,6 @@
 #include "../Course/CourseLib/creategame.hh"
 #include "../Course/CourseLib/core/logic.hh"
-#include "city.hh"
+#include "core/city.hh"
 
 #include <QApplication>
 #include <QImage>

@@ -10,6 +10,7 @@
 
 #include <memory>
 #include <QTime>
+#include <QTimer>
 
 
 namespace Student {
@@ -46,11 +47,18 @@ private:
 
     std::vector< std::shared_ptr<Interface::IActor> > actors_;
     //std::list< std::shared_ptr<CourseSide::Passenger> > passengers_;
-    //std::list< std::shared_ptr<CourseSide::Nysse> > buses_;
-    //std::vector< std::shared_ptr<CourseSide::Stop> > stops_;
+    std::list< std::shared_ptr<CourseSide::Nysse> > buses_;
+    std::vector< std::shared_ptr<Interface::IStop> > stops_;
 
     // Current time
     QTime time_;
+
+    //Round length given by user
+    int roundLength_ = 120;
+
+    int roundHasLasted_ = 0;
+
+    bool gameStarted_;
 
     CourseSide::SimpleMainWindow* window_;
 };

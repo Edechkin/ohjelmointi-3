@@ -6,8 +6,9 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
-    city.cpp \
+    core/city.cpp \
     creategame.cpp \
+    graphics/startdialog.cpp \
     main.cc
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -35,4 +36,8 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
-    city.hh
+    core/city.hh \
+    graphics/startdialog.hh
+
+FORMS += \
+    graphics/startdialog.ui
