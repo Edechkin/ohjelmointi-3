@@ -7,7 +7,9 @@
 #include "../Course/CourseLib/actors/passenger.hh"
 #include "../Course/CourseLib/actors/stop.hh"
 #include "graphics/mainwindow.hh"
+#include "./actors/player.hh"
 
+#include <list>
 #include <memory>
 #include <QTime>
 #include <QTimer>
@@ -20,6 +22,8 @@ class City : public Interface::ICity
 {
 public:
     City();
+
+    ~City();
 
     void setBackground(QImage& basicbackground, QImage& bigbackground);
 
@@ -49,6 +53,8 @@ private:
     //std::list< std::shared_ptr<CourseSide::Passenger> > passengers_;
     //std::list< std::shared_ptr<CourseSide::Nysse> > buses_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
+
+    std::shared_ptr<Student::Player> player_;
 
     // Current time
     QTime time_;

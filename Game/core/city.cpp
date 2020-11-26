@@ -1,5 +1,6 @@
 #include "city.hh"
 
+#include <algorithm>
 #include <QDebug>
 #include <QPushButton>
 
@@ -22,6 +23,11 @@ City::City() :
     setBackground(basicbackground, bigbackground);
 
     window_->show();
+
+}
+
+City::~City()
+{
 
 }
 
@@ -48,6 +54,8 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
+    player_ = std::make_shared<Student::Player>(5);
+    //window_->addPlayer(player_);
     gameStarted_ = true;
 }
 
@@ -72,7 +80,11 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
+    /*std::list<std::shared_ptr<Interface::IActor>>::iterator iter;
 
+    iter = std::find(actors_.begin(), actors_.end(), actor);*/
+
+    //bool result = contains(actors_, actor);
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)

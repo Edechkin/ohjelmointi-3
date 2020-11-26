@@ -11,8 +11,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->gameView->setFixedSize(width_, height_);
+    ui->gameView->setFixedSize(width_, width_);
     ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
+
+    //disable scroll bars
+    ui->gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     ui->startButton->move(width_ + PADDING , PADDING);
     ui->endButton->move(width_ + PADDING , (4 * PADDING));
@@ -63,6 +67,14 @@ void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
     stops_[stop] = nActor;
     map->addItem(nActor);
 }
+
+/*
+void MainWindow::addPlayer(std::shared_ptr<Player> player)
+{
+    int locX = player->giveLocation().giveX();
+    int locY = player->giveLocation().giveY();
+}
+*/
 
 void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
 {
