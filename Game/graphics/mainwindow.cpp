@@ -68,13 +68,18 @@ void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
     map->addItem(nActor);
 }
 
-/*
+
 void MainWindow::addPlayer(std::shared_ptr<Player> player)
 {
     int locX = player->giveLocation().giveX();
     int locY = player->giveLocation().giveY();
+    playerItem_ = new Student::UserGraphicsItem();
+    playerItem_->setPos(locX, locY);
+    playerItem_->setFlag(QGraphicsItem::ItemIsFocusable);
+    playerItem_->setFocus();
+    map->addItem(playerItem_);
 }
-*/
+
 
 void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
 {

@@ -5,6 +5,7 @@
 #include "../Course/CourseLib/actors/stop.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "./actors/player.hh"
+#include "usergraphicsitem.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -55,6 +56,7 @@ private:
     CourseSide::SimpleActorItem* last_;
 
     std::shared_ptr<Student::Player> * player_;
+    Student::UserGraphicsItem* playerItem_;
 
     int width_ = 500; //pxls
     int height_ = 500;

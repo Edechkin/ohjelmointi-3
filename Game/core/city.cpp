@@ -55,7 +55,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 void City::startGame()
 {
     player_ = std::make_shared<Student::Player>(5);
-    //window_->addPlayer(player_);
+    window_->addPlayer(player_);
     gameStarted_ = true;
 }
 

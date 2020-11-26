@@ -11,6 +11,7 @@ SOURCES += \
     creategame.cpp \
     graphics/mainwindow.cpp \
     graphics/startdialog.cpp \
+    graphics/usergraphicsitem.cpp \
     main.cc \
 
 win32:CONFIG(release, debug|release): LIBS += \
@@ -41,8 +42,14 @@ HEADERS += \
     actors/player.hh \
     core/city.hh \
     graphics/mainwindow.hh \
-    graphics/startdialog.hh \
+    graphics/startdialog.hh \ \
+    graphics/usergraphicsitem.hh
 
 FORMS += \
     graphics/mainwindow.ui \
     graphics/startdialog.ui \
+
+RESOURCES += \
+    res.qrc
+
+
