@@ -45,9 +45,9 @@ public:
 
 private:
 
-    std::vector< std::shared_ptr<Interface::IActor> > actors_;
+    std::list< std::shared_ptr<Interface::IActor> > actors_;
     //std::list< std::shared_ptr<CourseSide::Passenger> > passengers_;
-    std::list< std::shared_ptr<CourseSide::Nysse> > buses_;
+    //std::list< std::shared_ptr<CourseSide::Nysse> > buses_;
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
 
     // Current time

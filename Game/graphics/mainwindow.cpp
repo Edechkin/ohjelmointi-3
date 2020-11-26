@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
 
     ui->startButton->move(width_ + PADDING , PADDING);
-    ui->endButton->move(width_ + PADDING , PADDING + PADDING);
+    ui->endButton->move(width_ + PADDING , (4 * PADDING));
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
@@ -45,17 +45,36 @@ void MainWindow::setTick(int t)
     tick_ = t;
 }
 
-void MainWindow::addActor(int locX, int locY, int type)
+void MainWindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, type);
-    actors_.push_back(nActor);
+    int locX = actor->giveLocation().giveX();
+    int locY = actor->giveLocation().giveY();
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, 0);
+    actors_[actor] = nActor;
     map->addItem(nActor);
     last_ = nActor;
 }
 
-void MainWindow::updateCoords(int nX, int nY)
+void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    last_->setCoord(nX, nY);
+    int locX = stop->getLocation().giveX();
+    int locY = stop->getLocation().giveY();
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, 150);
+    stops_[stop] = nActor;
+    map->addItem(nActor);
+}
+
+void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
+{
+    map->removeItem(actors_.at(actorToRm));
+    actors_.erase(actorToRm);
+}
+
+void MainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
+{
+    int locX = actor->giveLocation().giveX();
+    int locY = actor->giveLocation().giveY();
+    actors_[actor]->setCoord(locX, locY);
 }
 
 void MainWindow::setPicture(QImage &img)

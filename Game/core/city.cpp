@@ -14,6 +14,8 @@ City::City() :
 
     window_ = new Student::MainWindow();
 
+
+
     QImage basicbackground(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage bigbackground(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
@@ -26,7 +28,7 @@ City::City() :
 
 void City::setBackground(QImage &basicbackground, QImage& bigbackground)
 {
-    window_->setPicture(bigbackground);
+    window_->setPicture(basicbackground);
 }
 
 void City::setClock(QTime clock)
@@ -40,8 +42,7 @@ void City::setClock(QTime clock)
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     //qDebug() << "adding a stop";
-    window_->addActor(stop->getLocation().giveX(),stop->getLocation().giveY(),
-                      255);
+    window_->addStop(stop);
     stops_.push_back(stop);
 }
 
@@ -52,14 +53,16 @@ void City::startGame()
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
-    window_->addActor(newactor->giveLocation().giveX(),
-                      newactor->giveLocation().giveY(), 0);
+    if ( std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) ){
+        window_->addActor(newactor);
+    }
     actors_.push_back(newactor);
 }
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-
+    window_->removeActor(actor);
+    actors_.remove(actor);
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
@@ -74,8 +77,9 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
-    window_->updateCoords(actor->giveLocation().giveX(),
-                          actor->giveLocation().giveY());
+    if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
+        window_->updateCoords(actor);
+    }
 }
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
