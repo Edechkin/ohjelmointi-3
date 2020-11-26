@@ -8,7 +8,7 @@ namespace Student {
 
 class Player : public Interface::IActor {
 public:
-    Player(int health);
+    Player();
     ~Player();
 
     Interface::Location giveLocation() const;
@@ -18,7 +18,6 @@ public:
 
 private:
     Interface::Location location_;
-    int health_;
 
     bool isRemoved_;
 

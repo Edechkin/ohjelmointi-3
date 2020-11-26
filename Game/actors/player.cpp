@@ -2,8 +2,7 @@
 
 namespace Student {
 
-Player::Player(int health) :
-    health_(health),
+Player::Player() :
     isRemoved_(false)
 {
     location_ = Interface::Location();

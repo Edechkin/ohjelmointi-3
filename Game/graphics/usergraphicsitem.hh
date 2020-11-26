@@ -12,11 +12,10 @@ class UserGraphicsItem : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     explicit UserGraphicsItem(QGraphicsItem *parent = nullptr);
-    void keyPressEvent(QKeyEvent* event);
-
-private:
+    bool move(char dir);
 
 };
+
 }
 
 #endif // USERGRAPHICSITEM_HH

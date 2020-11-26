@@ -2,6 +2,7 @@
 #define MAINWINDOW_HH
 
 #include "../Course/CourseLib/interfaces/iactor.hh"
+#include "../Course/CourseLib/core/location.hh"
 #include "../Course/CourseLib/actors/stop.hh"
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "./actors/player.hh"
@@ -41,6 +42,8 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
 
+    void keyPressEvent(QKeyEvent* event);
+
 signals:
     void gameStarted();
 
@@ -55,12 +58,12 @@ private:
     std::map<std::shared_ptr<Interface::IStop>, CourseSide::SimpleActorItem*> stops_;
     CourseSide::SimpleActorItem* last_;
 
-    std::shared_ptr<Student::Player> * player_;
+    std::shared_ptr<Student::Player> player_;
     Student::UserGraphicsItem* playerItem_;
 
     int width_ = 500; //pxls
     int height_ = 500;
-    int tick_ = 500; //ms
+    int tick_ = 10; //ms
 };
 
 } //namespace

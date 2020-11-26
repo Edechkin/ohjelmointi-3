@@ -54,7 +54,7 @@ void City::addStop(std::shared_ptr<Interface::IStop> stop)
 
 void City::startGame()
 {
-    player_ = std::make_shared<Student::Player>(5);
+    player_ = std::make_shared<Student::Player>();
     window_->addPlayer(player_);
     gameStarted_ = true;
 }
@@ -75,16 +75,14 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-
+    window_->removeActor(actor);
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 {
-    /*std::list<std::shared_ptr<Interface::IActor>>::iterator iter;
+    auto it = std::find(actors_.begin(), actors_.end(), actor);
 
-    iter = std::find(actors_.begin(), actors_.end(), actor);*/
-
-    //bool result = contains(actors_, actor);
+    return it != actors_.end();
 }
 
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
@@ -96,7 +94,15 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 
 std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface::Location loc) const
 {
+    std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
 
+    for (auto const& actorIter : actors_) {
+        if ( actorIter->giveLocation().isClose(loc)) {
+            nearbyActors.push_back(actorIter);
+        }
+    }
+
+    return nearbyActors;
 }
 
 bool City::isGameOver() const
