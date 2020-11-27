@@ -15,7 +15,7 @@ City::City() :
 
     window_ = new Student::MainWindow();
 
-
+    //window_->takeCity(this);
 
     QImage basicbackground(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage bigbackground(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
@@ -47,7 +47,6 @@ void City::setClock(QTime clock)
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    //qDebug() << "adding a stop";
     window_->addStop(stop);
     stops_.push_back(stop);
 }

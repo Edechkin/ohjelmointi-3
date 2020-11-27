@@ -1,5 +1,6 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
+#include "bomb.hh"
 #include <QDebug>
 #include <QKeyEvent>
 
@@ -54,7 +55,7 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
     int locX = actor->giveLocation().giveX();
     int locY = actor->giveLocation().giveY();
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, 0);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, 500 - locY, 0);
     actors_[actor] = nActor;
     map->addItem(nActor);
     last_ = nActor;
@@ -64,7 +65,7 @@ void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     int locX = stop->getLocation().giveX();
     int locY = stop->getLocation().giveY();
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, locY, 150);
+    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, 500 - locY, 150);
     stops_[stop] = nActor;
     map->addItem(nActor);
 }
@@ -94,13 +95,20 @@ void MainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
 {
     int locX = actor->giveLocation().giveX();
     int locY = actor->giveLocation().giveY();
-    actors_[actor]->setCoord(locX, locY);
+    actors_[actor]->setCoord(locX, 500 - locY);
 }
 
 void MainWindow::setPicture(QImage &img)
 {
     map->setBackgroundBrush(img);
 }
+
+/*
+void MainWindow::takeCity(City *city)
+{
+    city_ = city;
+}
+*/
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
@@ -117,7 +125,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         playerItem_->setDir('s');
     }
     else if (event->key() == Qt::Key_Space){
-
+        Student::Bomb* bomb = new Student::Bomb();
+        bomb->setPos(playerItem_->giveX() + 36, playerItem_->giveY() + 26);
+        map->addItem(bomb);
     }
 }
 

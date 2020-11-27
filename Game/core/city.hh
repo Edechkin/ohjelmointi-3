@@ -6,7 +6,7 @@
 #include "../Course/CourseLib/actors/nysse.hh"
 #include "../Course/CourseLib/actors/passenger.hh"
 #include "../Course/CourseLib/actors/stop.hh"
-#include "graphics/mainwindow.hh"
+#include "./graphics/mainwindow.hh"
 #include "./actors/player.hh"
 
 #include <list>

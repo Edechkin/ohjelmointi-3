@@ -42,6 +42,8 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
 
+    //void takeCity(Student::City* city);
+
     void keyPressEvent(QKeyEvent* event);
 
 signals:
@@ -58,6 +60,8 @@ private:
     std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
     std::map<std::shared_ptr<Interface::IStop>, CourseSide::SimpleActorItem*> stops_;
     CourseSide::SimpleActorItem* last_;
+
+    //Student::City* city_;
 
     std::shared_ptr<Student::Player> player_;
     Student::UserGraphicsItem* playerItem_;

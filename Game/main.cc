@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     std::shared_ptr<Interface::ICity> gameCity = Interface::createGame();
 
-    CourseSide::Logic* gamelogic = new CourseSide::Logic();
+    std::shared_ptr<CourseSide::Logic> gamelogic = std::make_shared<CourseSide::Logic>();
     gamelogic->fileConfig();
     gamelogic->takeCity(gameCity);
     gamelogic->finalizeGameStart();
