@@ -1,6 +1,9 @@
 #include "bomb.hh"
+#include "usergraphicsitem.hh"
 
 #include <QTimer>
+#include <QList>
+#include <QGraphicsScene>
 
 namespace Student {
 
@@ -18,6 +21,15 @@ Bomb::Bomb(QGraphicsItem *parent) : QObject(), QGraphicsPixmapItem(parent)
 
 void Bomb::remove()
 {
+    /*
+    QList<QGraphicsItem*> collidingItemsList = collidingItems();
+
+    for (QGraphicsItem* item : collidingItemsList) {
+        if (!(typeid(*item) == typeid(Student::UserGraphicsItem))) {
+            scene()->removeItem(item);
+        }
+    }*/
+
     delete this;
 }
 

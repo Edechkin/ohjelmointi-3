@@ -69,34 +69,4 @@ int UserGraphicsItem::giveY()
     return pos().y();
 }
 
-/*
-void UserGraphicsItem::keyPressEvent(QKeyEvent *event){
-
-    if (event->key() == Qt::Key_A){
-        if (pos().x() - 10 > 0) {
-            setPos(x()-2,y());
-            setRotation(180);
-        }
-    }
-    else if (event->key() == Qt::Key_D){
-        if (pos().x() + 10 < 405){
-            setPos(x()+2,y());
-            setRotation(0);
-        }
-    }
-    else if (event->key() == Qt::Key_W){
-        if (pos().y() - 10 > 0){
-            setPos(x(),y()-2);
-            setRotation(270);
-        }
-    }
-    else if (event->key() == Qt::Key_S){
-        if (pos().y() + 10 < 405){
-            setPos(x(),y()+2);
-            setRotation(90);
-        }
-    }
-}
-*/
-
 }

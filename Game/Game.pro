@@ -9,6 +9,7 @@ SOURCES += \
     actors/player.cpp \
     core/city.cpp \
     creategame.cpp \
+    graphics/actoritem.cpp \
     graphics/bomb.cpp \
     graphics/mainwindow.cpp \
     graphics/startdialog.cpp \
@@ -42,6 +43,7 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     actors/player.hh \
     core/city.hh \
+    graphics/actoritem.hh \
     graphics/bomb.hh \
     graphics/mainwindow.hh \
     graphics/startdialog.hh \ \

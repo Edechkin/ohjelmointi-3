@@ -1,6 +1,7 @@
 #include "mainwindow.hh"
 #include "ui_mainwindow.h"
 #include "bomb.hh"
+
 #include <QDebug>
 #include <QKeyEvent>
 
@@ -55,7 +56,7 @@ void MainWindow::addActor(std::shared_ptr<Interface::IActor> actor)
 {
     int locX = actor->giveLocation().giveX();
     int locY = actor->giveLocation().giveY();
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, 500 - locY, 0);
+    Student::ActorItem* nActor = new Student::ActorItem(locX, 500 - locY, 1);
     actors_[actor] = nActor;
     map->addItem(nActor);
     last_ = nActor;
@@ -65,7 +66,7 @@ void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 {
     int locX = stop->getLocation().giveX();
     int locY = stop->getLocation().giveY();
-    CourseSide::SimpleActorItem* nActor = new CourseSide::SimpleActorItem(locX, 500 - locY, 150);
+    Student::ActorItem* nActor = new Student::ActorItem(locX, 500 - locY, 2);
     stops_[stop] = nActor;
     map->addItem(nActor);
 }
@@ -102,13 +103,6 @@ void MainWindow::setPicture(QImage &img)
 {
     map->setBackgroundBrush(img);
 }
-
-/*
-void MainWindow::takeCity(City *city)
-{
-    city_ = city;
-}
-*/
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {

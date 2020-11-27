@@ -7,6 +7,7 @@
 #include "../Course/CourseLib/graphics/simpleactoritem.hh"
 #include "./actors/player.hh"
 #include "usergraphicsitem.hh"
+#include "actoritem.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -42,8 +43,6 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
 
-    //void takeCity(Student::City* city);
-
     void keyPressEvent(QKeyEvent* event);
 
 signals:
@@ -57,11 +56,9 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *map;
     QTimer *timer;
-    std::map<std::shared_ptr<Interface::IActor>, CourseSide::SimpleActorItem*> actors_;
-    std::map<std::shared_ptr<Interface::IStop>, CourseSide::SimpleActorItem*> stops_;
-    CourseSide::SimpleActorItem* last_;
-
-    //Student::City* city_;
+    std::map<std::shared_ptr<Interface::IActor>, Student::ActorItem*> actors_;
+    std::map<std::shared_ptr<Interface::IStop>, Student::ActorItem*> stops_;
+    Student::ActorItem* last_;
 
     std::shared_ptr<Student::Player> player_;
     Student::UserGraphicsItem* playerItem_;
