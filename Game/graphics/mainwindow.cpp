@@ -80,6 +80,7 @@ void MainWindow::addPlayer(std::shared_ptr<Player> player)
     playerItem_->setFlag(QGraphicsItem::ItemIsFocusable);
     playerItem_->setFocus();
     map->addItem(playerItem_);
+    connect(timer, &QTimer::timeout, this, &MainWindow::movePlayer);
 }
 
 
@@ -104,32 +105,16 @@ void MainWindow::setPicture(QImage &img)
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_A){
-        if(playerItem_->move('a')){
-            Interface::Location newLoc = player_->giveLocation();
-            newLoc.setXY(player_->giveLocation().giveX() - 10, 0);
-            player_->move(newLoc);
-        }
+        playerItem_->setDir('a');
     }
     else if (event->key() == Qt::Key_D){
-        if(playerItem_->move('d')){
-            Interface::Location newLoc = player_->giveLocation();
-            newLoc.setXY(player_->giveLocation().giveX() + 10, 0);
-            player_->move(newLoc);
-        }
+        playerItem_->setDir('d');
     }
     else if (event->key() == Qt::Key_W){
-        if(playerItem_->move('w')){
-            Interface::Location newLoc = player_->giveLocation();
-            newLoc.setXY(0, player_->giveLocation().giveY() - 10);
-            player_->move(newLoc);
-        }
+        playerItem_->setDir('w');
     }
     else if (event->key() == Qt::Key_S){
-        if(playerItem_->move('s')){
-            Interface::Location newLoc = player_->giveLocation();
-            newLoc.setXY(0, player_->giveLocation().giveY() + 10);
-            player_->move(newLoc);
-        }
+        playerItem_->setDir('s');
     }
     else if (event->key() == Qt::Key_Space){
 
@@ -142,4 +127,13 @@ void Student::MainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
+}
+
+void Student::MainWindow::movePlayer()
+{
+    if(playerItem_->move()){
+        Interface::Location newLoc = player_->giveLocation();
+        newLoc.setXY(playerItem_->giveX(), playerItem_->giveY());
+        player_->move(newLoc);
+    }
 }

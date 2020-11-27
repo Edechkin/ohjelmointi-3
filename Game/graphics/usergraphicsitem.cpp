@@ -12,37 +12,61 @@ UserGraphicsItem::UserGraphicsItem(QGraphicsItem *parent) :
 
 }
 
-bool UserGraphicsItem::move(char dir)
+bool UserGraphicsItem::move()
 {
-    if (dir == 'a'){
-        if (pos().x() - 3 > 0) {
+    if (dir_ == 'a'){
+        if (pos().x() - 6 > 0) {
             setPos(x()-2,y());
-            setRotation(180);
             return true;
         }
     }
-    else if (dir == 'd'){
-        if (pos().x() + 3 < 405){
+    else if (dir_ == 'd'){
+        if (pos().x() + 1 < 405){
             setPos(x()+2,y());
-            setRotation(0);
             return true;
         }
     }
-    else if (dir == 'w'){
-        if (pos().y() - 3 > 0){
+    else if (dir_ == 'w'){
+        if (pos().y() - 6 > 0){
             setPos(x(),y()-2);
-            setRotation(270);
             return true;
         }
     }
-    else if (dir == 's'){
-        if (pos().y() + 3 < 405){
+    else if (dir_ == 's'){
+        if (pos().y() + 1 < 405){
             setPos(x(),y()+2);
-            setRotation(90);
             return true;
         }
     }
     return false;
+}
+
+void UserGraphicsItem::setDir(char dir)
+{
+    dir_ = dir;
+
+    if (dir_ == 'a'){
+        setRotation(180);
+    }
+    else if (dir_ == 'd'){
+        setRotation(0);
+    }
+    else if (dir_ == 'w'){
+        setRotation(270);
+    }
+    else if (dir_ == 's'){
+        setRotation(90);
+    }
+}
+
+int UserGraphicsItem::giveX()
+{
+    return pos().x();
+}
+
+int UserGraphicsItem::giveY()
+{
+    return pos().y();
 }
 
 /*

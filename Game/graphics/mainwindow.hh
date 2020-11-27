@@ -49,6 +49,7 @@ signals:
 
 private slots:
     void on_startButton_clicked();
+    void movePlayer();
 
 private:
     Ui::MainWindow *ui;

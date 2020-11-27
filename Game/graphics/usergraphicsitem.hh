@@ -12,8 +12,15 @@ class UserGraphicsItem : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     explicit UserGraphicsItem(QGraphicsItem *parent = nullptr);
-    bool move(char dir);
 
+    void setDir(char dir);
+    bool move();
+
+    int giveX();
+    int giveY();
+
+private:
+    char dir_;
 };
 
 }
