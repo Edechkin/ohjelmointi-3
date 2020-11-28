@@ -44,6 +44,9 @@ void City::setClock(QTime clock)
     time_.setHMS(clock.hour(), clock.minute(), clock.second());
     if ( gameStarted_ ) {
         ++roundHasLasted_;
+        if (roundHasLasted_ >= roundLength_){
+            gameStarted_ = false;
+        }
     }
 }
 
@@ -123,6 +126,10 @@ void City::keyPressEvent(QKeyEvent *event)
                 actor->remove();
                 actorRemoved(actor);
             }
+
+            if (bombsUsed_ >= amOfBombs_){
+                gameStarted_ = false;
+            }
         }
     }
 }
@@ -143,6 +150,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     if ( roundHasLasted_ >= roundLength_ || bombsUsed_ >= amOfBombs_ ) {
+        window_->roundOver();
         return 1;
     }
 
