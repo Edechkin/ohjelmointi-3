@@ -1,8 +1,10 @@
 #include "city.hh"
 
 #include <algorithm>
+#include <QWidget>
 #include <QDebug>
 #include <QPushButton>
+#include <QKeyEvent>
 
 namespace Student {
 
@@ -21,6 +23,8 @@ City::City() :
     setBackground(basicbackground, bigbackground);
 
     window_->show();
+
+    City::grabKeyboard();
 
 }
 
@@ -66,13 +70,17 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
-    window_->removeActor(actor);
+    if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
+        window_->removeActor(actor);
+    }
     actors_.remove(actor);
 }
 
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
-    window_->removeActor(actor);
+    if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
+        window_->removeActor(actor);
+    }
 }
 
 bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
@@ -86,6 +94,36 @@ void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
         window_->updateCoords(actor);
+    }
+}
+
+void City::keyPressEvent(QKeyEvent *event)
+{
+    if (gameStarted_){
+        if (event->key() == Qt::Key_A){
+            window_->changeDirection('a');
+        }
+        else if (event->key() == Qt::Key_D){
+            window_->changeDirection('d');
+        }
+        else if (event->key() == Qt::Key_W){
+            window_->changeDirection('w');
+        }
+        else if (event->key() == Qt::Key_S){
+            window_->changeDirection('s');
+        }
+        else if (event->key() == Qt::Key_Space){
+            window_->addBomb();
+            ++bombsUsed_;
+
+            std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
+            nearbyActors = getNearbyActors(player_->giveLocation());
+
+            for (std::shared_ptr<Interface::IActor> actor : nearbyActors) {
+                actor->remove();
+                actorRemoved(actor);
+            }
+        }
     }
 }
 
@@ -104,7 +142,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 
 bool City::isGameOver() const
 {
-    if ( roundHasLasted_ >= roundLength_ ) {
+    if ( roundHasLasted_ >= roundLength_ || bombsUsed_ >= amOfBombs_ ) {
         return 1;
     }
 

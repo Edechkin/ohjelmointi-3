@@ -8,6 +8,7 @@ CONFIG += c++14
 SOURCES += \
     actors/player.cpp \
     core/city.cpp \
+    core/statistics.cpp \
     creategame.cpp \
     graphics/actoritem.cpp \
     graphics/bomb.cpp \
@@ -43,6 +44,7 @@ else:unix: PRE_TARGETDEPS += \
 HEADERS += \
     actors/player.hh \
     core/city.hh \
+    core/statistics.hh \
     graphics/actoritem.hh \
     graphics/bomb.hh \
     graphics/mainwindow.hh \

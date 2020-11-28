@@ -18,7 +18,7 @@
 namespace Student {
 
 
-class City : public Interface::ICity
+class City : public Interface::ICity, public QWidget
 {
 public:
     City();
@@ -43,6 +43,8 @@ public:
 
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
+    void keyPressEvent(QKeyEvent* event);
+
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
 
     bool isGameOver() const;
@@ -63,6 +65,11 @@ private:
     int roundLength_ = 120;
 
     int roundHasLasted_ = 0;
+
+    //Amount of bombs user can drop in a round
+    int amOfBombs_ = 20;
+
+    int bombsUsed_ = 0;
 
     bool gameStarted_;
 

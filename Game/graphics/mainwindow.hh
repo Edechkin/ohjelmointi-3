@@ -43,7 +43,8 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
 
-    void keyPressEvent(QKeyEvent* event);
+    void changeDirection(char dir);
+    void addBomb();
 
 signals:
     void gameStarted();

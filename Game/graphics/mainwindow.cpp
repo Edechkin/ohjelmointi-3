@@ -75,8 +75,8 @@ void MainWindow::addStop(std::shared_ptr<Interface::IStop> stop)
 void MainWindow::addPlayer(std::shared_ptr<Player> player)
 {
     player_ = player;
-    int locX = player->giveLocation().giveX();
-    int locY = player->giveLocation().giveY();
+    int locX = player->giveLocation().giveX() - 53;
+    int locY = player->giveLocation().giveY() - 43;
     playerItem_ = new Student::UserGraphicsItem();
     playerItem_->setPos(locX, locY);
     playerItem_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -88,15 +88,17 @@ void MainWindow::addPlayer(std::shared_ptr<Player> player)
 
 void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
 {
-    map->removeItem(actors_.at(actorToRm));
-    actors_.erase(actorToRm);
+    if (actors_.find(actorToRm) != actors_.end()){
+        map->removeItem(actors_.at(actorToRm));
+        actors_.erase(actorToRm);
+    }
 }
 
 void MainWindow::updateCoords(std::shared_ptr<Interface::IActor> actor)
 {
     int locX = actor->giveLocation().giveX();
     int locY = actor->giveLocation().giveY();
-    actors_[actor]->setCoord(locX, 500 - locY);
+    actors_[actor]->setCoord(locX - 20, 480 - locY);
 }
 
 void MainWindow::setPicture(QImage &img)
@@ -104,25 +106,27 @@ void MainWindow::setPicture(QImage &img)
     map->setBackgroundBrush(img);
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event)
+void MainWindow::changeDirection(char direction)
 {
-    if (event->key() == Qt::Key_A){
+    if (direction == 'a'){
         playerItem_->setDir('a');
     }
-    else if (event->key() == Qt::Key_D){
+    else if (direction == 'd'){
         playerItem_->setDir('d');
     }
-    else if (event->key() == Qt::Key_W){
+    else if (direction == 'w'){
         playerItem_->setDir('w');
     }
-    else if (event->key() == Qt::Key_S){
+    else if (direction == 's'){
         playerItem_->setDir('s');
     }
-    else if (event->key() == Qt::Key_Space){
-        Student::Bomb* bomb = new Student::Bomb();
-        bomb->setPos(playerItem_->giveX() + 36, playerItem_->giveY() + 26);
-        map->addItem(bomb);
-    }
+}
+
+void MainWindow::addBomb()
+{
+    Student::Bomb* bomb = new Student::Bomb();
+    bomb->setPos(playerItem_->giveX() + 36, playerItem_->giveY() + 26);
+    map->addItem(bomb);
 }
 
 }
@@ -137,7 +141,7 @@ void Student::MainWindow::movePlayer()
 {
     if(playerItem_->move()){
         Interface::Location newLoc = player_->giveLocation();
-        newLoc.setXY(playerItem_->giveX(), playerItem_->giveY());
+        newLoc.setXY(playerItem_->giveX() + 53, 500 - playerItem_->giveY() - 43);
         player_->move(newLoc);
     }
 }
