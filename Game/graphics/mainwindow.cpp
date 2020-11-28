@@ -4,6 +4,7 @@
 
 #include <QDebug>
 #include <QKeyEvent>
+#include <QLCDNumber>
 
 const int PADDING = 10;
 
@@ -23,6 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->startButton->move(width_ + PADDING , PADDING);
     ui->endButton->move(width_ + PADDING , (4 * PADDING));
+    ui->pointsView->move(width_ + PADDING, (7 * PADDING));
+
+    ui->textView->move(PADDING + 145, PADDING + 150);
+    ui->textView->hide();
+
+    points_ = 0;
+    ui->pointsView->display(points_);
 
     map = new QGraphicsScene(this);
     ui->gameView->setScene(map);
@@ -129,9 +137,18 @@ void MainWindow::addBomb()
     map->addItem(bomb);
 }
 
+void MainWindow::addPoints(int points)
+{
+    points_ += points;
+
+    ui->pointsView->display(points_);
+}
+
 void MainWindow::roundOver()
 {
     timer->stop();
+    ui->textView->setText("GAME OVER");
+    ui->textView->show();
 }
 
 }

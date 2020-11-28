@@ -83,6 +83,9 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
         window_->removeActor(actor);
+        window_->addPoints(10);
+    } else {
+        window_->addPoints(2);
     }
 }
 

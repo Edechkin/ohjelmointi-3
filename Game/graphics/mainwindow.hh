@@ -43,9 +43,10 @@ public:
     void updateCoords(std::shared_ptr<Interface::IActor>);
     void setPicture(QImage &img);
 
-    void changeDirection(char dir);
+    void changeDirection(char);
     void addBomb();
 
+    void addPoints(int points);
     void roundOver();
 
 signals:
@@ -65,6 +66,8 @@ private:
 
     std::shared_ptr<Student::Player> player_;
     Student::UserGraphicsItem* playerItem_;
+
+    int points_;
 
     int width_ = 500; //pxls
     int height_ = 500;
