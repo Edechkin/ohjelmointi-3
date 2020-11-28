@@ -46,6 +46,8 @@ public:
     void changeDirection(char dir);
     void addBomb();
 
+    void roundOver();
+
 signals:
     void gameStarted();
 

@@ -129,6 +129,11 @@ void MainWindow::addBomb()
     map->addItem(bomb);
 }
 
+void MainWindow::roundOver()
+{
+    timer->stop();
+}
+
 }
 
 void Student::MainWindow::on_startButton_clicked()
