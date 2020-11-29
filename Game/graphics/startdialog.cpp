@@ -8,6 +8,9 @@ StartDialog::StartDialog(QWidget *parent) :
     ui(new Ui::StartDialog)
 {
     ui->setupUi(this);
+
+    connect(ui->beginButton, &QPushButton::clicked, this, &StartDialog::accept);
+    connect(ui->endButton, &QPushButton::clicked, this, &StartDialog::reject);
 }
 
 StartDialog::~StartDialog()
@@ -18,6 +21,12 @@ StartDialog::~StartDialog()
 void StartDialog::on_userInput_valueChanged(int value)
 {
     userInput_ = value;
+    if (userInput_ < 1){
+        userInput_ = 1;
+    }
+    else if (userInput_ > 5){
+        userInput_ = 5;
+    }
 }
 
 void StartDialog::accept()

@@ -15,14 +15,13 @@ City::City() :
     gameStarted_(false)
 {
 
-    window_ = new Student::MainWindow();
+    window = new Student::MainWindow();
 
     QImage basicbackground(":/offlinedata/offlinedata/kartta_pieni_500x500.png");
     QImage bigbackground(":/offlinedata/offlinedata/kartta_iso_1095x592.png");
 
     setBackground(basicbackground, bigbackground);
 
-    window_->show();
 
     City::grabKeyboard();
 
@@ -36,7 +35,7 @@ City::~City()
 
 void City::setBackground(QImage &basicbackground, QImage& bigbackground)
 {
-    window_->setPicture(basicbackground);
+    window->setPicture(basicbackground);
 }
 
 void City::setClock(QTime clock)
@@ -52,21 +51,22 @@ void City::setClock(QTime clock)
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
 {
-    window_->addStop(stop);
+    window->addStop(stop);
     stops_.push_back(stop);
 }
 
 void City::startGame()
 {
     player_ = std::make_shared<Student::Player>();
-    window_->addPlayer(player_);
+    window->addPlayer(player_);
+    window->show();
     gameStarted_ = true;
 }
 
 void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) ){
-        window_->addActor(newactor);
+        window->addActor(newactor);
     }
     actors_.push_back(newactor);
 }
@@ -74,7 +74,7 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
-        window_->removeActor(actor);
+        window->removeActor(actor);
     }
     actors_.remove(actor);
 }
@@ -82,10 +82,10 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
-        window_->removeActor(actor);
-        window_->addPoints(10);
+        window->removeActor(actor);
+        window->addPoints(10);
     } else {
-        window_->addPoints(2);
+        window->addPoints(2);
     }
 }
 
@@ -99,7 +99,7 @@ bool City::findActor(std::shared_ptr<Interface::IActor> actor) const
 void City::actorMoved(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
-        window_->updateCoords(actor);
+        window->updateCoords(actor);
     }
 }
 
@@ -107,19 +107,19 @@ void City::keyPressEvent(QKeyEvent *event)
 {
     if (gameStarted_){
         if (event->key() == Qt::Key_A){
-            window_->changeDirection('a');
+            window->changeDirection('a');
         }
         else if (event->key() == Qt::Key_D){
-            window_->changeDirection('d');
+            window->changeDirection('d');
         }
         else if (event->key() == Qt::Key_W){
-            window_->changeDirection('w');
+            window->changeDirection('w');
         }
         else if (event->key() == Qt::Key_S){
-            window_->changeDirection('s');
+            window->changeDirection('s');
         }
         else if (event->key() == Qt::Key_Space){
-            window_->addBomb();
+            window->addBomb();
             ++bombsUsed_;
 
             std::vector<std::shared_ptr<Interface::IActor>> nearbyActors;
@@ -153,7 +153,7 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     if ( roundHasLasted_ >= roundLength_ || bombsUsed_ >= amOfBombs_ ) {
-        window_->roundOver();
+        window->roundOver();
         return 1;
     }
 

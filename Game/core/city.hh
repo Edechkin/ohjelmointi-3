@@ -20,6 +20,7 @@ namespace Student {
 
 class City : public Interface::ICity, public QWidget
 {
+
 public:
     City();
 
@@ -30,6 +31,8 @@ public:
     void setClock(QTime clock);
 
     void addStop(std::shared_ptr<Interface::IStop> stop);
+
+    Student::MainWindow* window;
 
     void startGame();
 
@@ -71,7 +74,6 @@ private:
 
     bool gameStarted_;
 
-    Student::MainWindow* window_;
 };
 
 }

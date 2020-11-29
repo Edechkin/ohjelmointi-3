@@ -14,9 +14,17 @@ int main(int argc, char *argv[])
     std::shared_ptr<Interface::ICity> gameCity = Interface::createGame();
 
     std::shared_ptr<CourseSide::Logic> gamelogic = std::make_shared<CourseSide::Logic>();
-    gamelogic->fileConfig();
-    gamelogic->takeCity(gameCity);
-    gamelogic->finalizeGameStart();
+
+    if (std::static_pointer_cast<Student::City>(gameCity)
+            ->window->startDialog->exec() == QDialog::Accepted)
+    {
+        gamelogic->fileConfig();
+        gamelogic->takeCity(gameCity);
+        gamelogic->finalizeGameStart();
+    }
+    else {
+        return 0;
+    }
 
     return a.exec();
 }
