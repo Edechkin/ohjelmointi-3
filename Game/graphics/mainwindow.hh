@@ -58,7 +58,7 @@ signals:
     void gameStarted();
 
 private slots:
-    void on_startButton_clicked();
+    //void on_startButton_clicked();
     void movePlayer();
     void initGameDiff(int userInput);
 

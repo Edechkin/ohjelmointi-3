@@ -8,6 +8,7 @@
 #include "../Course/CourseLib/actors/stop.hh"
 #include "./graphics/mainwindow.hh"
 #include "./actors/player.hh"
+#include "statistics.hh"
 
 #include <list>
 #include <memory>
@@ -73,6 +74,8 @@ private:
     int bombsUsed_ = 0;
 
     bool gameStarted_;
+
+    Statistics *ptr_;
 
 };
 

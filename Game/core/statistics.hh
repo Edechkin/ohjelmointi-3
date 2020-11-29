@@ -16,6 +16,10 @@ public:
     void newNysse();
     void nysseLeft();
 
+private:
+    int nysses_;
+    int passengers_;
+    int nyssesDestroyed_;
 };
 
 }
