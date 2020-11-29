@@ -8,6 +8,7 @@
 #include "./actors/player.hh"
 #include "usergraphicsitem.hh"
 #include "actoritem.hh"
+#include "startdialog.hh"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -49,12 +50,17 @@ public:
     void addPoints(int points);
     void roundOver();
 
+    Student::StartDialog* startDialog;
+
+    int roundlength;
+
 signals:
     void gameStarted();
 
 private slots:
     void on_startButton_clicked();
     void movePlayer();
+    void initGameDiff(int userInput);
 
 private:
     Ui::MainWindow *ui;

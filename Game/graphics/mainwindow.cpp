@@ -16,14 +16,19 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->gameView->setFixedSize(width_, width_);
-    ui->centralwidget->setFixedSize(width_ + ui->startButton->width() + PADDING, height_ + PADDING);
+    ui->centralwidget->setFixedSize(width_ + ui->endButton->width() + PADDING, height_ + PADDING);
+
+    startDialog = new Student::StartDialog();
+    connect(startDialog, &Student::StartDialog::beginClicked,
+            this, &MainWindow::initGameDiff);
 
     //disable scroll bars
     ui->gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ui->startButton->move(width_ + PADDING , PADDING);
-    ui->endButton->move(width_ + PADDING , (4 * PADDING));
+    //ui->startButton->move(width_ + PADDING , PADDING);
+    ui->endButton->move(width_ + PADDING , PADDING);
+    ui->pointsLabel->move(width_ + 2 * PADDING, 5 * PADDING);
     ui->pointsView->move(width_ + PADDING, (7 * PADDING));
 
     ui->textView->move(PADDING + 145, PADDING + 150);
@@ -41,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    timer->start(tick_);
+    //timer->start(tick_);
 }
 
 MainWindow::~MainWindow()
@@ -166,4 +171,11 @@ void Student::MainWindow::movePlayer()
         newLoc.setXY(playerItem_->giveX() + 53, 500 - playerItem_->giveY() - 43);
         player_->move(newLoc);
     }
+}
+
+void Student::MainWindow::initGameDiff(int userInput)
+{
+    int difficultyFactor = 5 / userInput;
+    tick_ = 10 * difficultyFactor;
+    timer->start(tick_);
 }

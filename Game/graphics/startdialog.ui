@@ -59,7 +59,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Enter length of round (min):</string>
+    <string>Game difficulty (1-5):</string>
    </property>
   </widget>
  </widget>
