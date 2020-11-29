@@ -98,6 +98,17 @@ void MainWindow::addPlayer(std::shared_ptr<Player> player)
     connect(timer, &QTimer::timeout, this, &MainWindow::movePlayer);
 }
 
+void MainWindow::addBonusbag(std::shared_ptr<Bonusbag> bonusBag)
+{
+    bonusBag_ = bonusBag;
+    int locX = bonusBag->giveLocation().giveX() - 15;
+    int locY = bonusBag->giveLocation().giveY() - 15;
+    bonusBagItem_ = new Student::BonusBagItem();
+    bonusBagItem_->setPos(locX, locY);
+    map->addItem(bonusBagItem_);
+    //connect(timer, &QTimer::timeout, this, &MainWindow::movePlayer);
+}
+
 
 void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
 {
@@ -123,15 +134,19 @@ void MainWindow::changeDirection(char direction)
 {
     if (direction == 'a'){
         playerItem_->setDir('a');
+        bonusBagItem_->setDir('a');
     }
     else if (direction == 'd'){
         playerItem_->setDir('d');
+        bonusBagItem_->setDir('d');
     }
     else if (direction == 'w'){
         playerItem_->setDir('w');
+        bonusBagItem_->setDir('w');
     }
     else if (direction == 's'){
         playerItem_->setDir('s');
+        bonusBagItem_->setDir('s');
     }
 }
 
@@ -170,6 +185,20 @@ void Student::MainWindow::movePlayer()
         Interface::Location newLoc = player_->giveLocation();
         newLoc.setXY(playerItem_->giveX() + 53, 500 - playerItem_->giveY() - 43);
         player_->move(newLoc);
+    }
+    if (!isBonusCollected){
+        if(bonusBagItem_->move()){
+            Interface::Location newLoc = bonusBag_->giveLocation();
+            newLoc.setXY(bonusBagItem_->giveX() + 15, 500 - bonusBagItem_->giveY() - 15);
+            bonusBag_->move(newLoc);
+        }
+        if (abs(bonusBagItem_->giveX()-playerItem_->giveX()) <= 10
+                and abs(bonusBagItem_->giveY()-playerItem_->giveY()) <= 10) {
+            isBonusCollected = true;
+            map->removeItem(bonusBagItem_);
+            delete bonusBagItem_;
+            }
+
     }
 }
 

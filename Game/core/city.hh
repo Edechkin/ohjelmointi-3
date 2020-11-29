@@ -9,6 +9,7 @@
 #include "./graphics/mainwindow.hh"
 #include "./actors/player.hh"
 #include "statistics.hh"
+#include "./actors/bonusbag.h"
 
 #include <list>
 #include <memory>
@@ -59,6 +60,8 @@ private:
     std::vector< std::shared_ptr<Interface::IStop> > stops_;
 
     std::shared_ptr<Student::Player> player_;
+    std::shared_ptr<Student::Bonusbag> bonusBag_;
+
 
     // Current time
     QTime time_;

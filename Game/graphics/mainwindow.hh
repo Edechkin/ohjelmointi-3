@@ -9,6 +9,8 @@
 #include "usergraphicsitem.hh"
 #include "actoritem.hh"
 #include "startdialog.hh"
+#include "./actors/bonusbag.h"
+#include "./graphics/bonusbagitem.h"
 
 #include <QMainWindow>
 #include <QGraphicsScene>
@@ -38,6 +40,8 @@ public:
     void addActor(std::shared_ptr<Interface::IActor>);
     void addStop(std::shared_ptr<Interface::IStop>);
     void addPlayer(std::shared_ptr<Student::Player>);
+    void addBonusbag(std::shared_ptr<Student::Bonusbag>);
+
 
     void removeActor(std::shared_ptr<Interface::IActor>);
 
@@ -53,6 +57,8 @@ public:
     Student::StartDialog* startDialog;
 
     int roundlength;
+
+    bool isBonusCollected = false;
 
 signals:
     void gameStarted();
@@ -72,6 +78,8 @@ private:
 
     std::shared_ptr<Student::Player> player_;
     Student::UserGraphicsItem* playerItem_;
+    std::shared_ptr<Student::Bonusbag> bonusBag_;
+    Student::BonusBagItem* bonusBagItem_;
 
     int points_;
 

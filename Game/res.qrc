@@ -4,5 +4,6 @@
         <file>images/explosion-14100.png</file>
         <file>images/bus.png</file>
         <file>images/stop.png</file>
+        <file>images/bonusbag.png</file>
     </qresource>
 </RCC>

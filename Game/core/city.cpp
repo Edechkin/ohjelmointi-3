@@ -48,6 +48,7 @@ void City::setClock(QTime clock)
             gameStarted_ = false;
         }
     }
+
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -60,6 +61,9 @@ void City::startGame()
 {
     player_ = std::make_shared<Student::Player>();
     window->addPlayer(player_);
+    bonusBag_ = std::make_shared<Student::Bonusbag>();
+    window->addBonusbag(bonusBag_);
+
     window->show();
     gameStarted_ = true;
 }
@@ -160,6 +164,9 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     if ( roundHasLasted_ >= roundLength_ || bombsUsed_ >= amOfBombs_ ) {
+        if (window->isBonusCollected) {
+            window->addPoints(100);
+        }
         window->roundOver();
         return 1;
     }
