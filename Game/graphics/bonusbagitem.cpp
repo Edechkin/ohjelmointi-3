@@ -4,8 +4,8 @@ namespace Student
 {
 
 BonusBagItem::BonusBagItem(QGraphicsItem *parent) :
-                           QGraphicsPixmapItem(parent),
-                           dir_('w')
+                           QGraphicsPixmapItem(parent)
+
 {
     setPixmap(QPixmap(":/images/bonusbag.png").scaled(QSize(30, 30)));
 

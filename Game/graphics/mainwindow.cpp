@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <QLCDNumber>
+#include <QMediaPlayer>
 
 const int PADDING = 10;
 
@@ -46,7 +47,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    //timer->start(tick_);
+
+    QMediaPlayer *music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/Intense DuBstep song.mp3"));
+    music->play();
 }
 
 MainWindow::~MainWindow()
@@ -192,8 +196,8 @@ void Student::MainWindow::movePlayer()
             newLoc.setXY(bonusBagItem_->giveX() + 15, 500 - bonusBagItem_->giveY() - 15);
             bonusBag_->move(newLoc);
         }
-        if (abs(bonusBagItem_->giveX()-playerItem_->giveX()) <= 10
-                and abs(bonusBagItem_->giveY()-playerItem_->giveY()) <= 10) {
+        if (abs(bonusBagItem_->giveX()-playerItem_->giveX()) <= 6
+                and abs(bonusBagItem_->giveY()-playerItem_->giveY()) <= 6) {
             isBonusCollected = true;
             map->removeItem(bonusBagItem_);
             delete bonusBagItem_;
