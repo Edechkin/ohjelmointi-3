@@ -23,5 +23,4 @@ No Doxyfile is provided with the project, but you may generate it using doxygen 
 
 You should create your own code inside your own namespace :)
 
-
-# You are allowed (and probably should) make changes to this file after you have started your project. :)
+Do not play on high resolution screen or the game window might appear to be very small.
