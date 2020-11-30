@@ -19,7 +19,7 @@ build_mauri-ja-eetu:
   tags:
     - qt
   script: 
-    - cd mauri-ja-eetu
+    #- cd mauri-ja-eetu
     - qmake
     - make
     - make clean
@@ -37,7 +37,7 @@ UnitTest:
   # When the script section starts, the working directory is the repository's root
   script: 
     # Go to the correct directory
-    - cd mauri-ja-eetu/UnitTest
+    - cd UnitTest
     # Run qmake to produce the makefile
     - qmake
     # Compile the project using the generated Makefile
@@ -49,7 +49,7 @@ UnitTest:
   artifacts:
     # Paths to the artifacts we want to pass
     paths:
-      - mauri-ja-eetu/UnitTest/teststatistics
+      - UnitTest/teststatistics
     # How long we store the artifacts in GitLab
     expire_in: 2d
 
@@ -60,7 +60,7 @@ statisticstest:
   stage: test
   script:
     # Go to the correct directory
-    - cd mauri-ja-eetu/UnitTest
+    - cd UnitTest
     # Run the test binary
     - ./teststatistics
   # On what jobs this dependes on, which artifacts we download for this job
