@@ -4,5 +4,7 @@
         <file>images/explosion-14100.png</file>
         <file>images/bus.png</file>
         <file>images/stop.png</file>
+        <file>images/bonusbag.png</file>
+        <file>sounds/Intense DuBstep song.mp3</file>
     </qresource>
 </RCC>

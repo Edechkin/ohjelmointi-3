@@ -6,12 +6,14 @@ QT += core gui widgets network multimedia
 CONFIG += c++14
 
 SOURCES += \
+    actors/bonusbag.cpp \
     actors/player.cpp \
     core/city.cpp \
     core/statistics.cpp \
     creategame.cpp \
     graphics/actoritem.cpp \
     graphics/bomb.cpp \
+    graphics/bonusbagitem.cpp \
     graphics/mainwindow.cpp \
     graphics/startdialog.cpp \
     graphics/usergraphicsitem.cpp \
@@ -42,11 +44,13 @@ else:unix: PRE_TARGETDEPS += \
     $$OUT_PWD/../Course/CourseLib/libCourseLib.a
 
 HEADERS += \
+    actors/bonusbag.h \
     actors/player.hh \
     core/city.hh \
     core/statistics.hh \
     graphics/actoritem.hh \
     graphics/bomb.hh \
+    graphics/bonusbagitem.h \
     graphics/mainwindow.hh \
     graphics/startdialog.hh \ \
     graphics/usergraphicsitem.hh

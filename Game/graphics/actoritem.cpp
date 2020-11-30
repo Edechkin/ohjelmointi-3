@@ -13,6 +13,7 @@ ActorItem::ActorItem(int x, int y, int type, QGraphicsItem *parent) :
     else if (type_ == 2) {
         setPixmap(QPixmap(":/images/stop.png").scaled(QSize(WIDTH, HEIGHT)));
     }
+
 }
 
 ActorItem::~ActorItem()

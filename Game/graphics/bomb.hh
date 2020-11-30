@@ -5,6 +5,10 @@
 #include <QGraphicsItem>
 #include <QObject>
 
+/**
+ * @brief defines graphics object for a bomb in the game
+ */
+
 namespace Student {
 
 class Bomb : public QObject, public QGraphicsPixmapItem

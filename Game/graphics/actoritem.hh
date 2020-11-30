@@ -5,6 +5,10 @@
 #include <QObject>
 #include <QGraphicsItem>
 
+/**
+ * @brief defineds graphics object for nysse and stop actors in game
+ */
+
 namespace Student {
 
 const int WIDTH = 20;

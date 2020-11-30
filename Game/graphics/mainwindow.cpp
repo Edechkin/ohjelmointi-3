@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QKeyEvent>
 #include <QLCDNumber>
+#include <QMediaPlayer>
 
 const int PADDING = 10;
 
@@ -26,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    //ui->startButton->move(width_ + PADDING , PADDING);
     ui->endButton->move(width_ + PADDING , PADDING);
     ui->pointsLabel->move(width_ + 2 * PADDING, 5 * PADDING);
     ui->pointsView->move(width_ + PADDING, (7 * PADDING));
@@ -46,7 +46,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
-    //timer->start(tick_);
+
+    QMediaPlayer *music = new QMediaPlayer();
+    music->setMedia(QUrl("qrc:/sounds/Intense DuBstep song.mp3"));
+    music->play();
 }
 
 MainWindow::~MainWindow()
@@ -98,6 +101,16 @@ void MainWindow::addPlayer(std::shared_ptr<Player> player)
     connect(timer, &QTimer::timeout, this, &MainWindow::movePlayer);
 }
 
+void MainWindow::addBonusbag(std::shared_ptr<Bonusbag> bonusBag)
+{
+    bonusBag_ = bonusBag;
+    int locX = bonusBag->giveLocation().giveX() - 15;
+    int locY = bonusBag->giveLocation().giveY() - 15;
+    bonusBagItem_ = new Student::BonusBagItem();
+    bonusBagItem_->setPos(locX, locY);
+    map->addItem(bonusBagItem_);
+}
+
 
 void MainWindow::removeActor(std::shared_ptr<Interface::IActor> actorToRm)
 {
@@ -123,15 +136,19 @@ void MainWindow::changeDirection(char direction)
 {
     if (direction == 'a'){
         playerItem_->setDir('a');
+        bonusBagItem_->setDir('a');
     }
     else if (direction == 'd'){
         playerItem_->setDir('d');
+        bonusBagItem_->setDir('d');
     }
     else if (direction == 'w'){
         playerItem_->setDir('w');
+        bonusBagItem_->setDir('w');
     }
     else if (direction == 's'){
         playerItem_->setDir('s');
+        bonusBagItem_->setDir('s');
     }
 }
 
@@ -158,13 +175,6 @@ void MainWindow::roundOver()
 
 }
 
-/*
-void Student::MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    emit gameStarted();
-}
-*/
 
 void Student::MainWindow::movePlayer()
 {
@@ -172,6 +182,23 @@ void Student::MainWindow::movePlayer()
         Interface::Location newLoc = player_->giveLocation();
         newLoc.setXY(playerItem_->giveX() + 53, 500 - playerItem_->giveY() - 43);
         player_->move(newLoc);
+    }
+
+    if (!isBonusCollected){
+        // move bonus item to a new location, and then check if user is close
+        // enough to collect it
+        if(bonusBagItem_->move()){
+            Interface::Location newLoc = bonusBag_->giveLocation();
+            newLoc.setXY(bonusBagItem_->giveX() + 15, 500 - bonusBagItem_->giveY() - 15);
+            bonusBag_->move(newLoc);
+        }
+        if (abs(bonusBagItem_->giveX()-playerItem_->giveX()) <= 6
+                and abs(bonusBagItem_->giveY()-playerItem_->giveY()) <= 6) {
+            isBonusCollected = true;
+            map->removeItem(bonusBagItem_);
+            delete bonusBagItem_;
+            }
+
     }
 }
 

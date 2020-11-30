@@ -24,6 +24,7 @@ City::City() :
 
 
     City::grabKeyboard();
+    ptr_ = new Statistics;
 
 }
 
@@ -47,6 +48,7 @@ void City::setClock(QTime clock)
             gameStarted_ = false;
         }
     }
+
 }
 
 void City::addStop(std::shared_ptr<Interface::IStop> stop)
@@ -59,6 +61,9 @@ void City::startGame()
 {
     player_ = std::make_shared<Student::Player>();
     window->addPlayer(player_);
+    bonusBag_ = std::make_shared<Student::Bonusbag>();
+    window->addBonusbag(bonusBag_);
+
     window->show();
     gameStarted_ = true;
 }
@@ -67,6 +72,10 @@ void City::addActor(std::shared_ptr<Interface::IActor> newactor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(newactor) ){
         window->addActor(newactor);
+        ptr_->newNysse();
+    }
+    else {
+        ptr_->morePassengers(1);
     }
     actors_.push_back(newactor);
 }
@@ -75,6 +84,7 @@ void City::removeActor(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
         window->removeActor(actor);
+        ptr_->nysseLeft();
     }
     actors_.remove(actor);
 }
@@ -83,6 +93,7 @@ void City::actorRemoved(std::shared_ptr<Interface::IActor> actor)
 {
     if ( std::dynamic_pointer_cast<CourseSide::Nysse>(actor) ){
         window->removeActor(actor);
+        ptr_->nysseRemoved();
         window->addPoints(10);
     } else {
         window->addPoints(2);
@@ -153,6 +164,9 @@ std::vector<std::shared_ptr<Interface::IActor> > City::getNearbyActors(Interface
 bool City::isGameOver() const
 {
     if ( roundHasLasted_ >= roundLength_ || bombsUsed_ >= amOfBombs_ ) {
+        if (window->isBonusCollected) {
+            window->addPoints(100);
+        }
         window->roundOver();
         return 1;
     }
