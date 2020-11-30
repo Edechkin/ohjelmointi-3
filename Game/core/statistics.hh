@@ -15,6 +15,9 @@ public:
     void nysseRemoved();
     void newNysse();
     void nysseLeft();
+    int getNysses();
+    int getPassengers();
+    int getNyssesDestroyed();
 
 private:
     int nysses_;

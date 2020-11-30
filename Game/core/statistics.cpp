@@ -34,4 +34,19 @@ void Statistics::nysseLeft()
     nysses_ -= 1;
 }
 
+int Statistics::getNysses()
+{
+    return nysses_;
+}
+
+int Statistics::getPassengers()
+{
+    return passengers_;
+}
+
+int Statistics::getNyssesDestroyed()
+{
+    return nyssesDestroyed_;
+}
+
 }

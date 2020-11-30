@@ -19,6 +19,7 @@
 #include <memory>
 #include <QVector>
 #include <map>
+#include <QMediaPlayer>
 
 namespace Ui {
 class MainWindow;
@@ -86,6 +87,8 @@ private:
     int width_ = 500; //pxls
     int height_ = 500;
     int tick_ = 10; //ms
+
+    QMediaPlayer *music_;
 };
 
 } //namespace

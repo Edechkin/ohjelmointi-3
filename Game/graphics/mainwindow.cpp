@@ -43,14 +43,12 @@ MainWindow::MainWindow(QWidget *parent) :
     map->setSceneRect(0,0,width_,height_);
 
     resize(minimumSizeHint());
-    //ui->gameView->fitInView(0,0, MAPWIDTH, MAPHEIGHT, Qt::KeepAspectRatio);
 
     timer = new QTimer(this);
     connect(timer, &QTimer::timeout, map, &QGraphicsScene::advance);
 
-    QMediaPlayer *music = new QMediaPlayer();
-    music->setMedia(QUrl("qrc:/sounds/Intense DuBstep song.mp3"));
-    music->play();
+    music_ = new QMediaPlayer();
+    music_->setMedia(QUrl("qrc:/sounds/Intense DuBstep song.mp3"));
 }
 
 MainWindow::~MainWindow()
@@ -110,7 +108,6 @@ void MainWindow::addBonusbag(std::shared_ptr<Bonusbag> bonusBag)
     bonusBagItem_ = new Student::BonusBagItem();
     bonusBagItem_->setPos(locX, locY);
     map->addItem(bonusBagItem_);
-    //connect(timer, &QTimer::timeout, this, &MainWindow::movePlayer);
 }
 
 
@@ -177,12 +174,6 @@ void MainWindow::roundOver()
 
 }
 
-/*void Student::MainWindow::on_startButton_clicked()
-{
-    qDebug() << "Start clicked";
-    emit gameStarted();
-}
-*/
 void Student::MainWindow::movePlayer()
 {
     if(playerItem_->move()){
@@ -211,4 +202,6 @@ void Student::MainWindow::initGameDiff(int userInput)
     int difficultyFactor = 5 / userInput;
     tick_ = 10 * difficultyFactor;
     timer->start(tick_);
+    music_->play();
+
 }
