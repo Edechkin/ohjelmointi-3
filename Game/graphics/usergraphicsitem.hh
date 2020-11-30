@@ -5,6 +5,10 @@
 #include <QObject>
 #include <QGraphicsItem>
 
+/**
+ * @brief defines graphics object for the player's character on screen
+ */
+
 namespace Student {
 
 class UserGraphicsItem : public QObject, public QGraphicsPixmapItem

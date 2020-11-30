@@ -21,6 +21,10 @@
 #include <map>
 #include <QMediaPlayer>
 
+/**
+ * @brief defines the mainwindow for the game, which also creates the startdialog
+ */
+
 namespace Ui {
 class MainWindow;
 }
@@ -57,15 +61,12 @@ public:
 
     Student::StartDialog* startDialog;
 
-    int roundlength;
-
     bool isBonusCollected = false;
 
 signals:
     void gameStarted();
 
 private slots:
-    //void on_startButton_clicked();
     void movePlayer();
     void initGameDiff(int userInput);
 

@@ -16,6 +16,9 @@
 #include <QTime>
 #include <QTimer>
 
+/**
+ * @brief defines the city for the game
+ */
 
 namespace Student {
 
@@ -24,6 +27,7 @@ class City : public Interface::ICity, public QWidget
 {
 
 public:
+    //ICity interface
     City();
 
     ~City();
@@ -33,8 +37,6 @@ public:
     void setClock(QTime clock);
 
     void addStop(std::shared_ptr<Interface::IStop> stop);
-
-    Student::MainWindow* window;
 
     void startGame();
 
@@ -48,11 +50,13 @@ public:
 
     void actorMoved(std::shared_ptr<Interface::IActor> actor);
 
-    void keyPressEvent(QKeyEvent* event);
-
     std::vector<std::shared_ptr<Interface::IActor>> getNearbyActors(Interface::Location loc) const;
 
     bool isGameOver() const;
+
+    //Game window and event handler for moving the player on the screen
+    Student::MainWindow* window;
+    void keyPressEvent(QKeyEvent* event);
 
 private:
 
@@ -66,7 +70,7 @@ private:
     // Current time
     QTime time_;
 
-    //Round length given by user
+    //Maximum round length, in seconds
     int roundLength_ = 120;
 
     int roundHasLasted_ = 0;
@@ -78,6 +82,7 @@ private:
 
     bool gameStarted_;
 
+    //Statistics class keeping track of events in game
     Statistics *ptr_;
 
 };

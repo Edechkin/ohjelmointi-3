@@ -4,10 +4,15 @@
 #include "../Course/CourseLib/interfaces/iactor.hh"
 #include "../Course/CourseLib/core/location.hh"
 
+/**
+ * @brief defines the player object for the game
+ */
+
 namespace Student {
 
 class Player : public Interface::IActor {
 public:
+    //IActor interface
     Player();
     ~Player();
 

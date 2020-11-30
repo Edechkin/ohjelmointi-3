@@ -11,7 +11,6 @@ BonusBagItem::BonusBagItem(QGraphicsItem *parent) :
 
     this->setZValue(1);
 
-
 }
 
 bool BonusBagItem::move()
@@ -45,7 +44,8 @@ bool BonusBagItem::move()
 
 void BonusBagItem::setDir(char dir)
 {
-
+    // set different direction than input, so it is harder to drive bonusitem in
+    // to a corner
 
     if (dir == 'a'){
         dir_ = 's';

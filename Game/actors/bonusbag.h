@@ -3,13 +3,17 @@
 
 #include "../Course/CourseLib/interfaces/iactor.hh"
 #include "../Course/CourseLib/core/location.hh"
-
+/**
+ * @brief defines a bonus item actor for the game, collecting which awards
+ *        player with extra points
+ */
 namespace Student {
 
 class Bonusbag : public Interface::IActor
 {
 
 public:
+    //IActor interface
     Bonusbag();
     ~Bonusbag();
 

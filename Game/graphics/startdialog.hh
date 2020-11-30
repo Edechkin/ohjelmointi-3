@@ -5,6 +5,11 @@
 #include <QPushButton>
 #include <QSpinBox>
 
+/**
+ * @brief defines the startdialog, that asks the user for game difficulty, which
+ *        affects the player and bonus items' speed on screen
+ */
+
 namespace Ui {
 class StartDialog;
 }

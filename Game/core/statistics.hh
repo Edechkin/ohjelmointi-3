@@ -3,6 +3,10 @@
 
 #include "../Course/CourseLib/interfaces/istatistics.hh"
 
+/**
+ * @brief defines Statistics class for keeping track of events in te game
+ */
+
 namespace Student {
 
 class Statistics : public Interface::IStatistics
@@ -20,8 +24,11 @@ public:
     int getNyssesDestroyed();
 
 private:
+    // nysses_ and passengers_ have the current total amount of nysses and
+    // passengers in game, respectively
     int nysses_;
     int passengers_;
+
     int nyssesDestroyed_;
 };
 

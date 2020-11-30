@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->gameView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->gameView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    //ui->startButton->move(width_ + PADDING , PADDING);
     ui->endButton->move(width_ + PADDING , PADDING);
     ui->pointsLabel->move(width_ + 2 * PADDING, 5 * PADDING);
     ui->pointsView->move(width_ + PADDING, (7 * PADDING));
@@ -174,6 +173,7 @@ void MainWindow::roundOver()
 
 }
 
+
 void Student::MainWindow::movePlayer()
 {
     if(playerItem_->move()){
@@ -181,7 +181,10 @@ void Student::MainWindow::movePlayer()
         newLoc.setXY(playerItem_->giveX() + 53, 500 - playerItem_->giveY() - 43);
         player_->move(newLoc);
     }
+
     if (!isBonusCollected){
+        // move bonus item to a new location, and then check if user is close
+        // enough to collect it
         if(bonusBagItem_->move()){
             Interface::Location newLoc = bonusBag_->giveLocation();
             newLoc.setXY(bonusBagItem_->giveX() + 15, 500 - bonusBagItem_->giveY() - 15);

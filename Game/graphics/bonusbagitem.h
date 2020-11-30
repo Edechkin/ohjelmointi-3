@@ -5,6 +5,10 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsItem>
 
+/**
+ * @brief defines a graphics object for bonus item in game
+ */
+
 namespace Student {
 
 
