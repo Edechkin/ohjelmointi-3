@@ -158,11 +158,13 @@ void MainWindow::roundOver()
 
 }
 
+/*
 void Student::MainWindow::on_startButton_clicked()
 {
     qDebug() << "Start clicked";
     emit gameStarted();
 }
+*/
 
 void Student::MainWindow::movePlayer()
 {
